@@ -1,4 +1,24 @@
 ## STATE
+
+Updating this code to work with the ESP32-LyraT V4.3 stereo board.
+
+Changes made:
+- Installed ESP32 ADF and IDF https://github.com/espressif/esp-adf
+- Updated CMakeLists.txt file to include($ENV{ADF_PATH}/CMakeLists.txt)
+- Added the nescessary include files to /main/app_main3.h file
+  and the following code:
+
+    audio_hal_codec_config_t es8388_cfg = AUDIO_CODEC_DEFAULT_CONFIG();
+    es8388_init(&es8388_cfg)
+    es8388_config_i2s(es8388_cfg.codec_mode, &es8388_cfg.i2s_iface);
+    es8388_ctrl_state(AUDIO_HAL_CODEC_MODE_BOTH, AUDIO_HAL_CTRL_START)
+    es8388_set_voice_volume(50); 
+
+- Next Steps:  Add board LyraT specific board details (i.e. I2S pinout etc)
+
+
+
+
 Release 2.3 R0 Stable  
 Verson adapted to ESP_IDF 4.4 Work in progress.  
   
